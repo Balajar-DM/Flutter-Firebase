@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase/fcm_remote_datasource.dart';
-import 'package:flutter_firebase/firebase_options.dart';
+
+import 'fcm_remote_datasource.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FcmRemoteDatasource().initialize();
+
   runApp(const MyApp());
 }
 
@@ -27,9 +29,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
   final String title;
+  const MyHomePage({super.key, required this.title});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -59,8 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           // String? token = await FirebaseMessaging.instance.getToken();
+          // final FcmRemoteDatasource fcmRemoteDatasource = FcmRemoteDatasource();
+          // final String? token = await fcmRemoteDatasource.getToken();
           // print(token);
         },
         tooltip: 'Increment',
